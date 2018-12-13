@@ -2,26 +2,26 @@ package main
 
 import (
 	"fmt"
-	// "grafana_webhook/libs"
+	"gwebhook/libs"
 	"log"
 	"net/http"
-
-	"github.com/slient2010/grafana_webhook/libs"
 )
 
 func main() {
 
-	addr := ":8080"
+	addr := ":9000"
 	handler := http.DefaultServeMux
-	handler.HandleFunc("/sms", libs.HandleWebhook(func(w http.ResponseWriter, b *Body) {
+	handler.HandleFunc("/sms", libs.HandleWebhook(func(w http.ResponseWriter, b *libs.Body) {
 
-		msg := fmt.Sprintf("Grafana status: %s\n%s", b.Title, b.Message)
+		msg := fmt.Sprintf("Grafana status: %s\n%s\n %s", b.Title, b.Message, b.State)
 		// sendMessage(msg)
 		log.Println(msg)
 
 	}, 0))
 
-	go http.ListenAndServe(addr, handler)
 	log.Println(fmt.Sprintf("API is listening on: %s", addr))
 
+	// http.ListenAndServe(addr, handler)
+
+	log.Fatal(http.ListenAndServe(addr, handler))
 }

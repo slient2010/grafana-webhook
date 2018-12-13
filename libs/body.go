@@ -1,4 +1,4 @@
-package grafana_webhook
+package libs
 
 const (
 	StateOk       State = "ok"
@@ -25,7 +25,7 @@ type Body struct {
 // BodyOnReadAllSizeLimitErr creates a default instance in case of a request size limit error
 func BodyOnReadAllSizeLimitErr() *Body {
 	return &Body{
-		Title: "undefined",
+		Title:   "undefined",
 		Message: "request size limit exceeded",
 	}
 }

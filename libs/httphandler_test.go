@@ -1,4 +1,4 @@
-package grafana_webhook
+package libs
 
 import (
 	"bytes"
